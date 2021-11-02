@@ -1,5 +1,6 @@
 import AsyncHTTPClient
 import Foundation
+import NIOFoundationCompat
 import NIOCore
 import NIOHTTP1
 import Prch
@@ -38,7 +39,7 @@ extension HTTPClient.Response: Response {
 
   public var data: Data? {
     body.map {
-      Data(buffer: $0)
+      Data(buffer: $0, byteTransferStrategy: .automatic)
     }
   }
 }
