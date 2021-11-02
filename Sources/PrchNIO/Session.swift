@@ -1,7 +1,7 @@
 import AsyncHTTPClient
 import Foundation
-import NIOFoundationCompat
 import NIOCore
+import NIOFoundationCompat
 import NIOHTTP1
 import Prch
 
