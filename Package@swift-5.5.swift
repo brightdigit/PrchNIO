@@ -14,12 +14,12 @@ let package = Package(
     .library(name: "PrchNIO", targets: ["PrchNIO"])
   ],
   dependencies: [
-//    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
-//    .package(url: "https://github.com/eneko/SourceDocs", from: "1.2.1"), // dev
-//    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
-//    .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
-//    .package(url: "https://github.com/shibapm/Rocket.git", from: "1.2.0"), // dev
-//    .package(url: "https://github.com/mattpolzin/swift-test-codecov", .branch("master")), // dev
+    .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
+    .package(url: "https://github.com/eneko/SourceDocs", from: "1.2.1"), // dev
+    .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
+    .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
+    .package(url: "https://github.com/shibapm/Rocket.git", from: "1.2.0"), // dev
+    .package(url: "https://github.com/mattpolzin/swift-test-codecov", .branch("master")), // dev
     .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0"),
     .package(url: "https://github.com/brightdigit/Prch.git", from: "0.1.0")
   ],
@@ -32,7 +32,7 @@ let package = Package(
 #if canImport(PackageConfig)
   import PackageConfig
 
-  let requiredCoverage: Int = 85
+  let requiredCoverage: Int = 0
 
   let config = PackageConfiguration([
     "rocket": [
@@ -52,13 +52,14 @@ let package = Package(
       "pre-push": [
         // "swift test --enable-code-coverage --enable-test-discovery",
         // swiftlint:disable:next line_length
-        "swift run swift-test-codecov .build/debug/codecov/SyndiKit.json --minimum \(requiredCoverage)"
+        "swift run swift-test-codecov .build/debug/codecov/PrchNIO.json --minimum \(requiredCoverage)"
       ],
       "pre-commit": [
         "swift test --enable-code-coverage --enable-test-discovery --generate-linuxmain",
         "swift run swiftformat .",
         "swift run swiftlint autocorrect",
-        "swift run sourcedocs generate build --clean --reproducible-docs --all-modules",
+        // swiftlint:disable:next line_length
+        // "swift run sourcedocs generate build --clean --reproducible-docs --all-modules",
         "git add .",
         "swift run swiftformat --lint .",
         "swift run swiftlint"
