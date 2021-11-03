@@ -39,7 +39,7 @@ extension HTTPClient.Response: Response {
 
   public var data: Data? {
     body.map {
-      Data(buffer: $0, byteTransferStrategy: .automatic)
+      Data(buffer: $0)
     }
   }
 }
