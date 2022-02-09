@@ -21,7 +21,7 @@ let package = Package(
     .package(url: "https://github.com/shibapm/Rocket.git", from: "1.2.0"), // dev
     .package(url: "https://github.com/mattpolzin/swift-test-codecov", .branch("master")), // dev
     .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0"),
-    .package(url: "https://github.com/brightdigit/Prch.git", from: "0.1.0")
+    .package(path: "../Prch.git")
   ],
   targets: [
     .target(name: "PrchNIO", dependencies: ["Prch", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
