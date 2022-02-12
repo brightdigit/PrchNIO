@@ -14,8 +14,13 @@ extension HTTPClient: EventLoopSession {
   ) -> EventLoopFuture<ResponseComponents> {
     execute(request: request).map { $0 as ResponseComponents }
   }
-  
-  public func createRequest<RequestType>(_ request: RequestType, withBaseURL baseURL: URL, andHeaders headers: [String : String], usingEncoder encoder: RequestEncoder) throws -> HTTPClient.Request where RequestType : Prch.Request {
+
+  public func createRequest<RequestType>(
+    _ request: RequestType,
+    withBaseURL baseURL: URL,
+    andHeaders headers: [String: String],
+    usingEncoder encoder: RequestEncoder
+  ) throws -> HTTPClient.Request where RequestType: Prch.Request {
     guard var componenets = URLComponents(
       url: baseURL.appendingPathComponent(request.path),
       resolvingAgainstBaseURL: false
@@ -48,7 +53,7 @@ extension HTTPClient: EventLoopSession {
 
     let body: Body?
     if let encodeBody = request.encodeBody {
-      body = try Body.data(encodeBody(JSONEncoder()))
+      body = try Body.data(encodeBody(encoder))
     } else {
       body = nil
     }

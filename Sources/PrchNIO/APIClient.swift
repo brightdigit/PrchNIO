@@ -4,7 +4,7 @@ import NIOCore
 import Prch
 
 public extension APIClient where SessionType: EventLoopSession {
-  func request<RequestType : Prch.Request>(
+  func request<RequestType: Prch.Request>(
     _ request: RequestType
   ) -> EventLoopFuture<RequestType.ResponseType> {
     var sessionRequest: SessionType.RequestType
