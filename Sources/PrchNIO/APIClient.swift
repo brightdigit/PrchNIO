@@ -4,15 +4,16 @@ import NIOCore
 import Prch
 
 public extension APIClient where SessionType: EventLoopSession {
-  func request<ResponseType>(
-    _ request: APIRequest<ResponseType>
-  ) -> EventLoopFuture<ResponseType> {
+  func request<RequestType : Prch.Request>(
+    _ request: RequestType
+  ) -> EventLoopFuture<RequestType.ResponseType> {
     var sessionRequest: SessionType.RequestType
     do {
       sessionRequest = try session.createRequest(
         request,
         withBaseURL: api.baseURL,
-        andHeaders: api.headers
+        andHeaders: api.headers,
+        usingEncoder: api.encoder
       )
     } catch {
       return session
@@ -25,7 +26,7 @@ public extension APIClient where SessionType: EventLoopSession {
         throw APIClientError.invalidResponse
       }
       let data = response.data ?? Data()
-      return try ResponseType(
+      return try RequestType.ResponseType(
         statusCode: httpStatus,
         data: data,
         decoder: self.api.decoder
