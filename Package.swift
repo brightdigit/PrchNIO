@@ -51,7 +51,7 @@ let package = Package(
       "pre-push": [
         // "swift test --enable-code-coverage --enable-test-discovery",
         // swiftlint:disable:next line_length
-        "swift run swift-test-codecov .build/debug/codecov/PrchNIO.json --minimum \(requiredCoverage)"
+        // "swift run swift-test-codecov .build/debug/codecov/PrchNIO.json --minimum \(requiredCoverage)"
       ],
       "pre-commit": [
         "swift test --enable-code-coverage --enable-test-discovery --generate-linuxmain",
