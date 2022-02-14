@@ -11,20 +11,21 @@ extension HTTPClient: EventLoopSession {
 
   public func beginRequest(
     _ request: HTTPClient.Request
-  ) -> EventLoopFuture<Prch.Response> {
-    execute(request: request).map { $0 as Prch.Response }
+  ) -> EventLoopFuture<ResponseComponents> {
+    execute(request: request).map { $0 as ResponseComponents }
   }
 
-  public func createRequest<ResponseType>(
-    _ request: APIRequest<ResponseType>,
+  public func createRequest<RequestType>(
+    _ request: RequestType,
     withBaseURL baseURL: URL,
-    andHeaders headers: [String: String]
-  ) throws -> HTTPClient.Request where ResponseType: APIResponseValue {
+    andHeaders headers: [String: String],
+    usingEncoder encoder: RequestEncoder
+  ) throws -> HTTPClient.Request where RequestType: Prch.Request {
     guard var componenets = URLComponents(
       url: baseURL.appendingPathComponent(request.path),
       resolvingAgainstBaseURL: false
     ) else {
-      throw APIClientError.badURL(baseURL, request.path)
+      throw ClientError.badURL(baseURL, request.path)
     }
 
     // filter out parameters with empty string value
@@ -37,10 +38,10 @@ extension HTTPClient: EventLoopSession {
     componenets.queryItems = queryItems
 
     guard let url = componenets.url else {
-      throw APIClientError.urlComponents(componenets)
+      throw ClientError.urlComponents(componenets)
     }
 
-    let method = HTTPMethod(rawValue: request.service.method)
+    let method = HTTPMethod(rawValue: request.method)
 
     let headerDict = request.headers.merging(
       headers, uniquingKeysWith: { requestHeaderKey, _ in
@@ -52,7 +53,7 @@ extension HTTPClient: EventLoopSession {
 
     let body: Body?
     if let encodeBody = request.encodeBody {
-      body = try Body.data(encodeBody(JSONEncoder()))
+      body = try Body.data(encodeBody(encoder))
     } else {
       body = nil
     }

@@ -1,8 +1,9 @@
 import AsyncHTTPClient
 import Foundation
+import NIOFoundationCompat
 import Prch
 
-extension HTTPClient.Response: Response {
+extension HTTPClient.Response: ResponseComponents {
   public var statusCode: Int? {
     Int(status.code)
   }
