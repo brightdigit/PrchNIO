@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/brightdigit/Prch.git",
         "state": {
           "branch": null,
-          "revision": "0bfc77657088fdacc995c0368a767c2ba18b94f2",
-          "version": "0.1.1"
+          "revision": "74513ceb865358b457a656290ded54ed67de1702",
+          "version": "0.2.0-beta.1"
         }
       },
       {
@@ -138,11 +138,11 @@
       },
       {
         "package": "swift-test-codecov",
-        "repositoryURL": "https://github.com/mattpolzin/swift-test-codecov",
+        "repositoryURL": "https://github.com/brightdigit/swift-test-codecov",
         "state": {
-          "branch": "master",
-          "revision": "474b38a4dba9370c3cd64b91791c383f83ff5fdc",
-          "version": null
+          "branch": null,
+          "revision": "8ca50588a72d1869cc6edafdee5f1e7fa9783b7b",
+          "version": "1.0.0"
         }
       },
       {
@@ -188,15 +188,6 @@
           "branch": null,
           "revision": "9183170d20857753d4f331b0ca63f73c60764bf3",
           "version": "5.0.2"
-        }
-      },
-      {
-        "package": "TextTable",
-        "repositoryURL": "https://github.com/mattpolzin/TextTable.git",
-        "state": {
-          "branch": "swift-5",
-          "revision": "536620625e75905a7d8ad457803e744656a1023b",
-          "version": null
         }
       },
       {
