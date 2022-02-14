@@ -2,7 +2,7 @@ name: PrchNIO
 on:
   push:
     branches:
-      - '*'
+      - 'pr/*'
       - 'feature/*'
       - 'release/*'
       - 'bugfix/*'
