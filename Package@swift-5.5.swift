@@ -15,13 +15,12 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/shibapm/Komondor", from: "1.1.0"), // dev
-    .package(url: "https://github.com/eneko/SourceDocs", from: "1.2.1"), // dev
     .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.47.0"), // dev
     .package(url: "https://github.com/realm/SwiftLint", from: "0.43.0"), // dev
     .package(url: "https://github.com/shibapm/Rocket.git", from: "1.2.0"), // dev
-    .package(url: "https://github.com/mattpolzin/swift-test-codecov", .branch("master")), // dev
-    .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.0.0"),
-    .package(url: "https://github.com/brightdigit/Prch.git", from: "0.1.0")
+    .package(url: "https://github.com/brightdigit/swift-test-codecov", from: "1.0.0"), // dev
+    .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.9.0"),
+    .package(url: "https://github.com/brightdigit/Prch.git", from: "0.2.0-beta.1")
   ],
   targets: [
     .target(name: "PrchNIO", dependencies: ["Prch", .product(name: "AsyncHTTPClient", package: "async-http-client")]),
@@ -49,17 +48,9 @@ let package = Package(
       ]
     ],
     "komondor": [
-      "pre-push": [
-        // "swift test --enable-code-coverage --enable-test-discovery",
-        // swiftlint:disable:next line_length
-        "swift run swift-test-codecov .build/debug/codecov/PrchNIO.json --minimum \(requiredCoverage)"
-      ],
       "pre-commit": [
-        "swift test --enable-code-coverage --enable-test-discovery --generate-linuxmain",
         "swift run swiftformat .",
         "swift run swiftlint autocorrect",
-        // swiftlint:disable:next line_length
-        // "swift run sourcedocs generate build --clean --reproducible-docs --all-modules",
         "git add .",
         "swift run swiftformat --lint .",
         "swift run swiftlint"
