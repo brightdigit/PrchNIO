@@ -11,7 +11,7 @@
   }
 
   public func __allTests() -> [XCTestCaseEntry] {
-    return [
+    [
       testCase(PrchNIOTests.__allTests__PrchNIOTests)
     ]
   }
